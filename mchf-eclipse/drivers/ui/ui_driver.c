@@ -7461,6 +7461,7 @@ void UiDriver_StartUpScreenInit()
 //	nextY = UiLcdHy28_PrintTextCentered(ts.Layout->StartUpScreen_START.x, nextY + 8, 320, tx, Yellow, Black, 1);
 	nextY = UiLcdHy28_PrintTextCentered(posX, nextY + 8, 320, tx, Yellow, Black, 0);
 	nextY = UiLcdHy28_PrintTextCentered(posX, nextY + 3, 320, "Firmware License: " UHSDR_LICENCE "\n" UHSDR_REPO, White, Black, 0);
+    nextY = UiLcdHy28_PrintTextCentered(posX, nextY + 8, 320, UHSDR_COMMENT, White, Orange, 0);
 
 	// show important error status
 	startUpScreen_nextLineY = nextY + 8; // reset y coord to first line of error messages

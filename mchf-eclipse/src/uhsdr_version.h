@@ -14,7 +14,7 @@
 
 #define 	UHSDR_VER_MAJOR			"2"
 #define 	UHSDR_VER_MINOR			"14"
-#define 	UHSDR_VER_RELEASE		"1"
+#define 	UHSDR_VER_RELEASE		"1a"
 
 
 #define		UHSDR_BOOT_VERS			"5.0.4m"
@@ -33,3 +33,4 @@
 #define	    UHSDR_BUILD_DAT         "fwt-"__DATE__ " - " __TIME__
 #define	    UHSDR_LICENCE           "GNU GPLv3"
 #define     UHSDR_REPO              "github.com/strijar/UHSDR"
+#define     UHSDR_COMMENT           "MOVVA ["__TIME__"]"
