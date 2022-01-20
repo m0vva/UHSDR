@@ -200,6 +200,8 @@ typedef struct
     void (*DrawStraightLine)(uint16_t x, uint16_t y, uint16_t Length, uint8_t Direction,uint16_t color);
     void (*DrawFullRect)(uint16_t Xpos, uint16_t Ypos, uint16_t Height, uint16_t Width ,uint16_t color);
     void (*DrawColorPoint)(uint16_t Xpos, uint16_t Ypos, uint16_t point);
+    void (*FillTriangle)(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+    void (*DrawLine)(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
 } mchf_display_t;
 
 extern mchf_display_t mchf_display;
@@ -230,6 +232,9 @@ void 	UiLcdHy28_DrawBottomButton(ushort Xpos, ushort Ypos, ushort Height, ushort
 void 	UiLcdHy28_DrawFullRect (ushort Xpos, ushort Ypos, ushort Height, ushort Width, ushort color);
 
 void 	UiLcdHy28_DrawColorPoint(ushort x, ushort y, ushort color);
+
+void    UiLcdHy28_FillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+void    UiLcdHy28_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
 
 void    UiLcdHy28_BulkPixel_OpenWrite(ushort x, ushort width, ushort y, ushort height);
 void    UiLcdHy28_BulkPixel_CloseWrite(void);

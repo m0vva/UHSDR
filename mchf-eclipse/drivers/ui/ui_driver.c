@@ -34,6 +34,7 @@
 // LCD
 #include "ui_lcd_hy28.h"
 #include "ui_spectrum.h"
+#include "ui_gauge.h"
 
 #include "freedv_uhsdr.h"
 
@@ -2821,7 +2822,8 @@ static void UiDriver_CreateDesktop(void)
 	UiDriver_CreateFunctionButtons(true);
 
 	// S-meter
-	UiDriver_CreateMeters();
+//	UiDriver_CreateMeters();
+	CreateAnalogMeter();
 
 	if (UiDriver_GetSpectrumMode() == SPECTRUM_BLANK)
 	{
@@ -3398,7 +3400,7 @@ static void UiDriver_UpdateTopMeterA(uchar val)
 {
 	ulong clr;
 	UiMenu_MapColors(ts.meter_colour_up,NULL,&clr);
-	UiDriver_UpdateMeter(val,0,clr,METER_TOP);
+//	UiDriver_UpdateMeter(val,0,clr,METER_TOP);  // M0VVA
 }
 
 /**
@@ -3418,7 +3420,7 @@ static void UiDriver_UpdateBtmMeter(float val, uchar warn)
 	{
 		val = S_METER_MAX;
 	}
-	UiDriver_UpdateMeter(val,warn,clr,METER_BTM);
+	// UiDriver_UpdateMeter(val,warn,clr,METER_BTM);  //M0VVA
 }
 
 // FIXME: Move to RadioManagement()
