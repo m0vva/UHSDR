@@ -104,6 +104,7 @@ typedef struct {
 
 	UiArea_t DIGMODE;				// Digimode item
 	UiArea_t SM_IND;				// S meter position
+	UiArea_t SG_IND;				// S meter gauge position
 	UiCoord_t PWR_IND;				// Supply Voltage indicator
 	UiCoord_t TEMP_IND;				// Temperature Indicator
 	UiCoord_t RTC_IND;				// RTC
