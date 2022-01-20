@@ -172,7 +172,9 @@ typedef struct
     uint16_t (*ReadReg)( uint16_t LCD_Reg);
     void (*DrawStraightLine)(uint16_t x, uint16_t y, uint16_t Length, uint8_t Direction,uint16_t color);
     void (*DrawFullRect)(uint16_t Xpos, uint16_t Ypos, uint16_t Height, uint16_t Width ,uint16_t color);
+    void (*FillTriangle)(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
     void (*DrawColorPoint)(uint16_t Xpos, uint16_t Ypos, uint16_t point);
+    void (*DrawLine)(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
     GPIO_TypeDef* spi_cs_port;
     uint16_t      spi_cs_pin;
     uint16_t      is_spi:1;

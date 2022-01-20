@@ -678,6 +678,19 @@ void UiLcdRa8875_WriteReg_8bit(uint16_t LCD_Reg, uint8_t LCD_RegValue);
 void UiLcdRa8875_WriteReg_16bit(uint16_t LCD_Reg, uint16_t LCD_RegValue);
 #endif
 
+#ifndef min
+#define min(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+
+#ifndef _swap_int16_t
+#define _swap_int16_t(a, b)                                                    \
+  {                                                                            \
+    int16_t t = a;                                                             \
+    a = b;                                                                     \
+    b = t;                                                                     \
+  }
+#endif
+
 static void UiLcdHy28_BulkWriteColor(uint16_t Color, uint32_t len);
 
 static inline bool UiLcdHy28_SpiDisplayUsed(void)
@@ -1521,7 +1534,7 @@ void UiLcdHy28_FillTriangle_ILI(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t 
     mchf_display.DrawStraightLine(a ,y, b - a  + 1, LCD_DIR_HORIZONTAL, color);  
 
   }
-  endWrite();
+//   endWrite();
 }
 
 
