@@ -737,7 +737,7 @@ const LcdLayout LcdLayouts[LcdLayoutsCount]=
 				.FREEDV_FONT = 4,
 
 				.SM_IND = { .x = 113, .y = 0, .h = 52, .w = 203 },
-				.SG_IND = { .x = 113, .y = 0, .h = 100, .w = 100 },
+				.SG_IND = { .x = 113, .y = 0, .h = 52, .w = 203 },
 //				.PWR_IND = { .x = 16, .y = 86 },
 				.PWR_IND = { .x = 16, .y = 72 },
 

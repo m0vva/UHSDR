@@ -1399,12 +1399,8 @@ void UiLcdHy28_DrawColorPoint_ILI(uint16_t Xpos,uint16_t Ypos,uint16_t point)
 }
 #endif
 
-//void UiLcdHy28_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color)
-//{
-//    UiLcdHy28_DrawLine_ILI(x0,y0,x1,y1,color);
-//}
 
-void UiLcdHy28_DrawLine_ILI(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
+void UiLcdHy28_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
   int16_t steep = abs(y1 - y0) > abs(x1 - x0);
   if (steep) {
     _swap_int16_t(x0, y0);
@@ -1443,12 +1439,8 @@ void UiLcdHy28_DrawLine_ILI(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint
   }
 }
 
-//void UiLcdHy28_FillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
-//{
-//    UiLcdHy28_FillTriangle_ILI(x0,y0,x1,y1,x2,y2,color);
-//}
 
-void UiLcdHy28_FillTriangle_ILI(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
+void UiLcdHy28_FillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
 {
     // M0VVA
     int16_t a, b, y, last;

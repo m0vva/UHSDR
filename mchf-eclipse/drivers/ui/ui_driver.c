@@ -3400,7 +3400,7 @@ static void UiDriver_UpdateTopMeterA(uchar val)
 {
 	ulong clr;
 	UiMenu_MapColors(ts.meter_colour_up,NULL,&clr);
-//	UiDriver_UpdateMeter(val,0,clr,METER_TOP);  // M0VVA
+//	UiDriver_UpdateMeter(val,0,clr,METER_TOP);
 }
 
 /**
@@ -3420,7 +3420,7 @@ static void UiDriver_UpdateBtmMeter(float val, uchar warn)
 	{
 		val = S_METER_MAX;
 	}
-	// UiDriver_UpdateMeter(val,warn,clr,METER_BTM);  //M0VVA
+//	UiDriver_UpdateMeter(val,warn,clr,METER_BTM);
 }
 
 // FIXME: Move to RadioManagement()
@@ -7582,8 +7582,8 @@ static void UiAction_ChangeLowerMeterDownOrSnap(void)
 void UiAction_ChangeLowerMeterUp()
 {
 	incr_wrap_uint8(&ts.tx_meter_mode,0,METER_MAX-1);
-	UiDriver_DeleteMeters();
-	UiDriver_CreateMeters();	// redraw meter
+//	UiDriver_DeleteMeters();
+//	UiDriver_CreateMeters();	// redraw meter
 #ifdef SDR_AMBER
   #ifndef SDR_AMBER_480_320
   UiLcdHy28_PrintTextVertLen(308, 43, "Amber", 5, Grey4, Black);
@@ -9332,7 +9332,7 @@ void UiDriver_TaskHandler_MainTasks()
 			{
 	            UiDriver_HandleTXMeters();
 	            RadioManagement_HandleIqGainAndSMeter();
-				UiDriver_HandleSMeter();
+// M0VVA				UiDriver_HandleSMeter();
 #ifdef USE_FREEDV
 				if (ts.dmod_mode == DEMOD_DIGI && ts.digital_mode == DigitalMode_FreeDV)
 				{
