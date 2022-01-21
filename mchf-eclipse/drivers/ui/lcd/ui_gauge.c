@@ -17,6 +17,75 @@
 #include "uhsdr_board.h"
 #include "ui_lcd_hy28.h"
 
+int old_analog =  -999; // Value last displayed
+float ltx = 0;    // Saved x coord of bottom of needle
+uint16_t osx = 120, osy = 120; // Saved x & y coords
+uint32_t updateTime = 0;       // time for next update
+
+// #########################################################################
+// Update needle position
+// This function is blocking while needle moves, time depends on ms_delay
+// 10ms minimises needle flicker if text is drawn within needle sweep area
+// Smaller values OK if text not in sweep area, zero for instant movement but
+// does not look realistic... (note: 100 increments for full scale deflection)
+// #########################################################################
+void plotNeedle(int value, byte ms_delay)
+{
+  char buf[8]; dtostrf(value, 4, 0, buf);
+  // tft.drawRightString(buf, 40, 119 - 20, 2);
+
+  if (value < -10) value = -10; // Limit value to emulate needle end stops
+  if (value > 110) value = 110;
+
+  // Move the needle util new value reached
+  while (!(value == old_analog)) {
+    if (old_analog < value) old_analog++;
+    else old_analog--;
+    
+    if (ms_delay == 0) old_analog = value; // Update immediately id delay is 0
+    
+    float sdeg = map(old_analog, -10, 110, -150, -30); // Map value to angle 
+    // Calcualte tip of needle coords
+    float sx = cos(sdeg * 0.0174532925);
+    float sy = sin(sdeg * 0.0174532925);
+
+    // Calculate x delta of needle start (does not start at pivot point)
+    float tx = tan((sdeg+90) * 0.0174532925);
+    
+    // Erase old needle image
+    // tft.drawLine(120 + 20 * ltx - 1, 140 - 20, osx - 1, osy, ILI9341_WHITE);
+    // tft.drawLine(120 + 20 * ltx, 140 - 20, osx, osy, ILI9341_WHITE);
+    // tft.drawLine(120 + 20 * ltx + 1, 140 - 20, osx + 1, osy, ILI9341_WHITE);
+    UiLcdHy28_DrawLine(120 + 20 * ltx - 1, 140 - 20, osx - 1, osy, Black);
+    UiLcdHy28_DrawLine(120 + 20 * ltx, 140 - 20, osx, osy, Black);
+    UiLcdHy28_DrawLine(120 + 20 * ltx + 1, 140 - 20, osx + 1, osy, Black);
+    
+    // Re-plot text under needle
+    // tft.setTextColor(ILI9341_BLACK);
+    // tft.drawCentreString("%RH", 120, 70, 4); // // Comment out to avoid font 4
+    
+    // Store new needle end coords for next erase
+    ltx = tx;
+    osx = sx * 98 + 120;
+    osy = sy * 98 + 140;
+    
+    // Draw the needle in the new postion, magenta makes needle a bit bolder
+    // draws 3 lines to thicken needle
+    // tft.drawLine(120 + 20 * ltx - 1, 140 - 20, osx - 1, osy, ILI9341_RED);
+    // tft.drawLine(120 + 20 * ltx, 140 - 20, osx, osy, ILI9341_MAGENTA);
+    // tft.drawLine(120 + 20 * ltx + 1, 140 - 20, osx + 1, osy, ILI9341_RED);
+    UiLcdHy28_DrawLine(120 + 20 * ltx - 1, 140 - 20, osx - 1, osy, Red);
+    UiLcdHy28_DrawLine(120 + 20 * ltx, 140 - 20, osx, osy, Magenta);
+    UiLcdHy28_DrawLine(120 + 20 * ltx + 1, 140 - 20, osx + 1, osy, Red);
+    
+    // Slow needle down slightly as it approaches new postion
+    if (abs(old_analog - value) < 10) ms_delay += ms_delay / 5;
+    
+    // Wait before next update
+    delay(ms_delay);
+  }
+}
+
 // #########################################################################
 //  Draw the analogue meter on the screen
 // #########################################################################
@@ -144,5 +213,5 @@ void CreateAnalogMeter()
     UiLcdHy28_DrawEmptyRect(ts.Layout->SG_IND.x + 5,ts.Layout->SG_IND.y + 3,ts.Layout->SG_IND.h - 9,ts.Layout->SG_IND.w - 7, Black);
 //   tft.drawRect(5, 3, 230, 119, ILI9341_BLACK); // Draw bezel line
   
-//   plotNeedle(0,0); // Put meter needle at 0
+   plotNeedle(0,0); // Put meter needle at 0
 }
